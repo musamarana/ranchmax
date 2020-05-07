@@ -1,0 +1,636 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.master.cs" Inherits="Ranch_Max.Dashboard" %>
+
+
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <link href="Content/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+     <script src="https://kit.fontawesome.com/dc098fc6ea.js" crossorigin="anonymous"></script>
+    
+
+  
+         <style>
+body{
+    font-family:'Montserrat', sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+
+
+#sidebar {
+    margin-top:60px;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    bottom:0;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #696969;
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y:scroll;
+}
+
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+
+#sidebar .sidebar-header {
+    padding:20px 20px 20px 20px;
+    background: #696969;
+}
+
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+
+#sidebar ul li a {
+    color: #000;
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+
+#sidebar ul li a:hover {
+    color: #fff;
+    transition: all .4s;
+    background: #000000;
+    border-radius: 10px;
+}
+
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #A9A9A9;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 1.2em !important;
+    padding-left: 30px !important;
+    background: #A9A9A9;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 1.2em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #fff;
+}
+
+a.article,
+a.article:hover {
+    background: #fff !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+
+#content {
+    width: calc(100% - 250px);
+    padding: 40px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+#content.active {
+    width: 100%;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+   
+ #content {
+        width: 100%;
+    }
+   
+ #content.active {
+        width: calc(100% - 250px);
+    }
+    
+#sidebarCollapse span {
+        display: normal;
+    }
+}
+        
+        /*child page CSS*/
+        #content{
+           margin-top:60px;
+           margin-right:60px;
+           float:right;
+           border: #2980b9 4px solid;
+           width:75%;
+           text-align:center;
+       }
+
+    </style>
+
+
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/09076d2359.js"></script>
+
+    
+
+    <asp:ContentPlaceHolder ID="NestedMaster" runat="server"></asp:ContentPlaceHolder>
+     <script type="text/javascript">
+         $(document).ready(function () {
+
+             $("#sidebar").mCustomScrollbar({
+                 theme: "minimal"
+             });
+
+
+             $('#sidebarCollapse').on('click', function () {
+                 $('#sidebar, #content').toggleClass('active');
+                 $('.collapse.in').toggleClass('in');
+                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+             });
+         });
+        </script>
+    <!--  side bar -->
+
+        <!--sidebar button-->
+            <%--<button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <span>CMS</span>
+                    </button>--%>
+        
+             <div class="wrapper">       
+
+                 <nav id="sidebar">
+            
+            <div class="sidebar-header">
+             <img  src="../img/images.jpg" width="70" style="border-radius:50%; margin-left:auto; margin-right:auto; display:block;"/>
+
+                <h3  style="padding:20px 20px 20px 20px;">Ranch Max</h3>
+                <strong></strong>
+            </div>
+
+            <ul class="list-unstyled components">
+                
+                 <li >
+                    <a href="#aborSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                          <i class="fas fa-baby" style ="margin-right:10px; margin-left:40px;"></i>
+                        Abortion 
+                    </a>
+                    <ul class="collapse list-unstyled" id="aborSubmenu">
+                        <li>
+                            <a href="/User/Abortion.aspx">
+                                <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+                                Add Abortion</a>
+                        </li>
+                        <li>
+                            <a href="/User/Abortion View.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                View Abortion</a>
+                        </li>
+               
+                    </ul>
+                </li>
+
+                
+                <li >
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                          <i class="fas fa-paw" style ="margin-right:10px; margin-left:40px;"></i>
+                        Animal 
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="/User/Animal_Add.aspx">
+                                <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+                                Add Animals</a>
+                        </li>
+                        <li>
+                            <a href="/User/Animal_View.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                View Animals</a>
+                        </li>
+                        <li>
+                            <a href="/User/Animal_Sale.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                Sale Animals</a>
+                        </li>
+                        <li>
+                            <a href="/User/Animal_Sale View.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                Show Sold Animals</a>
+                        </li>
+                        <li>
+                            <a href="/User/Animal_Detail.aspx">
+                                <i class="fas fa-book" style ="margin-right:10px;"></i>
+                                
+                                Animal Detail</a>
+                        </li>
+               </ul>
+                    </li>
+
+                         <li >
+                    <a href="#breedSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                          <i class="fas fa-venus-double" style ="margin-right:10px; margin-left:40px;"></i>
+                        Breeding 
+                    </a>
+                    <ul class="collapse list-unstyled" id="breedSubmenu">
+                        <li>
+                            <a href="/User/Breeding.aspx">
+                                <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+                                Add Breeding</a>
+                        </li>
+                        <li>
+                            <a href="/User/Breeding_View.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                View Breeding</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                         <li >
+                    <a href="#calvSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                          <i class="fas fa-baby-carriage" style ="margin-right:10px; margin-left:40px;"></i>
+                        Calving 
+                    </a>
+                    <ul class="collapse list-unstyled" id="calvSubmenu">
+                        <li>
+                            <a href="/User/Calving.aspx">
+                                <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+                                Add Calving</a>
+                        </li>
+                        <li>
+                            <a href="/User/Calving_View.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                View Calving</a>
+                        </li>
+          
+                    </ul>
+                </li>
+                
+                    <li >
+                    <a href="#drySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                          <i class=" fas fa-recycle" style ="margin-right:10px; margin-left:40px;"></i>
+                        Dry Period 
+                    </a>
+                    <ul class="collapse list-unstyled" id="drySubmenu">
+                        <li>
+                            <a href="/User/DryPeriod.aspx">
+                                <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+                                Add Dry Period</a>
+                        </li>
+                        <li>
+                            <a href="/User/DryPeriod_View.aspx">
+                                <i class="far fa-eye" style ="margin-right:10px;"></i>
+                                
+                                View Dry Period</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li> 
+                    <a href="#empSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-users" style ="margin-right:10px; margin-left:40px;"></i>
+                        Employees
+                    </a>
+                    <ul class="collapse list-unstyled" id="empSubmenu">
+                         
+                        <li>
+                            <a href="/Account/Register.aspx">
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Add Employee</a>
+                        </li>
+                          <li>
+                            <a href="/Admin/AspNetUserView.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Employees</a>
+                        </li>
+
+                        <li>
+                            <a href="/Admin/UserInfoAdd.aspx">
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Add User Info</a>
+                        </li>
+                          <li>
+                            <a href="/Admin/EmployeeView.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View User Info</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/RolesAdd.aspx">
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Add Roles</a>
+                        </li>
+                        <li>
+                            <a href="/Admin/RolesAssign.aspx">
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Assign Roles</a>
+                        </li>
+                        </ul>
+                </li>
+                
+                
+                 <li>
+                    <a href="#feedSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-utensils" style ="margin-right:10px; margin-left:40px;"></i>
+                        Feed
+                    </a>
+                    <ul class="collapse list-unstyled" id="feedSubmenu">
+                        <li>
+                            <a href="/User/FeedPreparing.aspx">
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Prepare Feed</a>
+                        </li>
+                         <li>
+                            <a href="/User/FeedPrepairing View.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Feed Prepairing</a>
+                        </li>
+                        <li>
+                            <a href="/User/FeedConsumption.aspx"> 
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+      
+                                Add Feed Consumption</a>
+                        </li>
+                        <li>
+                            <a href="FeedConsumption View.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Feed Consumption</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                           <li>
+                <a href="#ExpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-calculator" style ="margin-right:10px; margin-left:40px;"></i>
+                        Finance
+                    </a>
+                    <ul class="collapse list-unstyled" id="ExpSubmenu">
+                             
+                         <li>
+                            <a href="/User/Expenses.aspx"> 
+                          <i class="fas fa-sort-amount-down" style ="margin-right:10px;" ></i>
+      
+                                Add Expense</a>
+                        </li>
+                        <li>
+                            <a href="/User/Expense View.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Expenses </a>
+                        </li>
+                        <li>
+                            <a href="/User/Expense Detail.aspx">
+                             <i class="fas fa-book" style ="margin-right:10px;"></i>
+
+                                Expense Detail </a>
+                        </li>
+                    </ul>
+                </li>
+                
+
+                <li>
+                                    <a href="#MasterSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                          <i class="fas fa-tasks" style ="margin-right:10px; margin-left:40px;"></i>
+                        Masters 
+                    </a>
+                    <ul class="collapse list-unstyled" id="MasterSubmenu">
+                         <li>
+                            <a href="/User/AnimalBreed.aspx">
+                                <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+                                Add Breed</a>
+                        </li>
+                       
+                        <li>
+                            <a href="/User/FeedFormula.aspx">
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+         
+                                  Feed Formula</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/User/StockType.aspx">
+                    <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                  Stock Type</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/User/Expense Master.aspx"> 
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+      
+                                Expense Master</a>
+                        </li>
+                         
+               </ul>
+                    </li>
+
+                
+                <li>
+                <a href="#MedSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="	fas fa-medkit" style ="margin-right:10px; margin-left:40px;"></i>
+                        Medical
+                    </a>
+                    <ul class="collapse list-unstyled" id="MedSubmenu">
+                              <li>
+                            <a href="/User/Medication.aspx"> 
+                          <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+      
+                                Add Medication</a>
+                        </li>
+                        <li>
+                            <a href="/User/Medication View.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Medication </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-coffee" style ="margin-right:10px; margin-left:40px;"></i>
+                        Milking
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="/User/Milk_Buyer.aspx">
+                      <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                        Add Buyer</a>
+                        </li>
+                        <li>
+                            <a href="/User/Milk_Buyer View.aspx">
+                      <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                        View Buyer</a>
+                        </li>
+                        <li>
+                            <a href="/User/Milking.aspx">
+                      <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Add Milk</a>
+                        </li>
+                        <li>
+                            <a href="/User/Milk Sale.aspx">
+                              <i class="fas fa-donate" style ="margin-right:10px;"></i>
+
+                                Sell Milk</a>
+                        </li>
+                        <li>
+                            <a href="/User/Milk_Sale View.aspx">
+                              <i class="fas fa-donate" style ="margin-right:10px;"></i>
+
+                                Show Sold Milk</a>
+                        </li>
+                        <li>
+                            <a href="/User/Milk_Detail">
+                     <i class="fas fa-book" style ="margin-right:10px;"></i>
+
+                                Milk Detail</a>
+                        </li>
+                    </ul>
+                </li>
+                
+
+                <li>
+                    <a href="#stockSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-boxes" style ="margin-right:10px; margin-left:40px;"></i>
+                        Stock
+                    </a>
+                    <ul class="collapse list-unstyled" id="stockSubmenu">
+                         
+                        <li>
+                            <a href="/User/StockItem.aspx">
+                    <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Insert Item</a>
+                        </li>
+                        <li>
+                            <a href="/User/StockItem View.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Items</a>
+                        </li>
+                        <li>
+                            <a href="/User/StockAdd.aspx">
+                       <i class="fas fa-plus-square" style ="margin-right:10px;" ></i>
+
+                                Add Stock</a>
+                        </li>
+
+                        <li>
+                            <a href="/User/StockView.aspx">
+                             <i class="far fa-eye" style ="margin-right:10px;"></i>
+
+                                View Stock</a>
+                        </li>
+                         <li>
+                            <a href="/User/StockRemaining.aspx">
+                       <i class="fas fa-balance-scale" style ="margin-right:10px;" ></i>
+
+                                 Remaining Stock</a>
+                        </li>
+                    </ul>
+                </li>
+                 
+                <%--<li>--%>
+                 <li>
+                    <a href="#">
+                        <i class="fas fa-question" style ="margin-right:10px; margin-left:40px;"></i>
+                        FAQ
+                    </a>
+                </li>
+                
+             </ul>
+        
+                     </nav>
+                    
+                 
+             </div>
+            
+        
+        
+        <!--  close side bar -->
+   
+</div>     
+    
+
+</asp:Content>

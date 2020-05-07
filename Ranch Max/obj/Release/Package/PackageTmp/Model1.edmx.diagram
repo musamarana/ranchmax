@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="212b771635f04d1ea62957f6384bd62f" Name="Diagram1">
+        <EntityTypeShape EntityType="DefaultConnectionModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Abortion" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Animal" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AnimalBreed" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AnimalSale" Width="1.5" PointX="8.25" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetRole" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUserInfo" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.AspNetUser" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Breeding" Width="1.5" PointX="8.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Buyer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Calving" Width="1.5" PointX="8.25" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.DryPeriod" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Expense_Type" Width="1.5" PointX="8.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Expens" Width="1.5" PointX="11" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.FeedConsumption" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.FeedFormula" Width="1.5" PointX="6" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.FeedPreparing" Width="1.5" PointX="14.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Medication" Width="1.5" PointX="8.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.MilkBuyer" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.Milking" Width="1.5" PointX="11.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.StockAdd" Width="1.5" PointX="11.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.StockItem" Width="1.5" PointX="9" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.StockRemaining" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.StockType" Width="1.5" PointX="6.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DefaultConnectionModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Abortion_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Abortion_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Animal_AnimalBreed" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_AnimalSale_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Breeding_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Breeding_Animal1" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Calving_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_DryPeriod_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_FeedConsumption_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Medication_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Milking_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_AspNetUserInfo_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Breeding_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_FeedConsumption_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Medication_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Milking_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_StockAdd_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_MilkBuyer_Buyer" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Expenses_Expense_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_FeedConsumption_FeedFormula" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_FeedPreparing_FeedFormula" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_FeedPreparing_StockItem" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_Medication_StockItem" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_StockAdd_StockItem" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.FK_StockItem_StockType" ManuallyRouted="false" />
+        <AssociationConnector Association="DefaultConnectionModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DefaultConnectionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Abortion">
+    <Key>
+      <PropertyRef Name="Abortion_Id" />
+    </Key>
+    <Property Name="Abortion_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Animal_Id" Type="Int32" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_Abortion_Animal" FromRole="Abortion" ToRole="Animal" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Abortion_AspNetUsers" FromRole="Abortion" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Animal">
+    <Key>
+      <PropertyRef Name="Animal_Id" />
+    </Key>
+    <Property Name="Animal_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Breed_Id" Type="Int32" Nullable="false" />
+    <Property Name="EarTag" Type="Int32" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OriginCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Lactation" Type="Int32" />
+    <Property Name="Sire" Type="Int32" />
+    <Property Name="InsertionDate" Type="DateTime" Precision="0" />
+    <Property Name="Birthdate" Type="DateTime" Precision="0" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Weight" Type="Int32" />
+    <NavigationProperty Name="Abortions" Relationship="Self.FK_Abortion_Animal" FromRole="Animal" ToRole="Abortion" />
+    <NavigationProperty Name="AnimalBreed" Relationship="Self.FK_Animal_AnimalBreed" FromRole="Animal" ToRole="AnimalBreed" />
+    <NavigationProperty Name="AnimalSales" Relationship="Self.FK_AnimalSale_Animal" FromRole="Animal" ToRole="AnimalSale" />
+    <NavigationProperty Name="Breedings" Relationship="Self.FK_Breeding_Animal" FromRole="Animal" ToRole="Breeding" />
+    <NavigationProperty Name="Breedings1" Relationship="Self.FK_Breeding_Animal1" FromRole="Animal" ToRole="Breeding" />
+    <NavigationProperty Name="Calvings" Relationship="Self.FK_Calving_Animal" FromRole="Animal" ToRole="Calving" />
+    <NavigationProperty Name="DryPeriods" Relationship="Self.FK_DryPeriod_Animal" FromRole="Animal" ToRole="DryPeriod" />
+    <NavigationProperty Name="FeedConsumptions" Relationship="Self.FK_FeedConsumption_Animal" FromRole="Animal" ToRole="FeedConsumption" />
+    <NavigationProperty Name="Medications" Relationship="Self.FK_Medication_Animal" FromRole="Animal" ToRole="Medication" />
+    <NavigationProperty Name="Milkings" Relationship="Self.FK_Milking_Animal" FromRole="Animal" ToRole="Milking" />
+  </EntityType>
+  <EntityType Name="AnimalBreed">
+    <Key>
+      <PropertyRef Name="Breed_Id" />
+    </Key>
+    <Property Name="Breed_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Breed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Animals" Relationship="Self.FK_Animal_AnimalBreed" FromRole="AnimalBreed" ToRole="Animal" />
+  </EntityType>
+  <EntityType Name="AnimalSale">
+    <Key>
+      <PropertyRef Name="AnimalSale_Id" />
+    </Key>
+    <Property Name="AnimalSale_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Animal_Id" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="BuyerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNIC" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_AnimalSale_Animal" FromRole="AnimalSale" ToRole="Animal" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserInfo">
+    <Key>
+      <PropertyRef Name="InfoId" />
+    </Key>
+    <Property Name="InfoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Fname" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Cnic" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUserInfo_AspNetUsers" FromRole="AspNetUserInfo" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Abortions" Relationship="Self.FK_Abortion_AspNetUsers" FromRole="AspNetUsers" ToRole="Abortion" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserInfoes" Relationship="Self.FK_AspNetUserInfo_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUserInfo" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="Breedings" Relationship="Self.FK_Breeding_AspNetUsers" FromRole="AspNetUsers" ToRole="Breeding" />
+    <NavigationProperty Name="FeedConsumptions" Relationship="Self.FK_FeedConsumption_AspNetUsers" FromRole="AspNetUsers" ToRole="FeedConsumption" />
+    <NavigationProperty Name="Medications" Relationship="Self.FK_Medication_AspNetUsers" FromRole="AspNetUsers" ToRole="Medication" />
+    <NavigationProperty Name="Milkings" Relationship="Self.FK_Milking_User" FromRole="AspNetUsers" ToRole="Milking" />
+    <NavigationProperty Name="StockAdds" Relationship="Self.FK_StockAdd_AspNetUsers" FromRole="AspNetUsers" ToRole="StockAdd" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Breeding">
+    <Key>
+      <PropertyRef Name="Breeding_Id" />
+    </Key>
+    <Property Name="Breeding_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Animal_Id" Type="Int32" />
+    <Property Name="Animal_Id_M" Type="Int32" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Dose" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_Breeding_Animal" FromRole="Breeding" ToRole="Animal" />
+    <NavigationProperty Name="Animal1" Relationship="Self.FK_Breeding_Animal1" FromRole="Breeding" ToRole="Animal" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Breeding_AspNetUsers" FromRole="Breeding" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Buyer">
+    <Key>
+      <PropertyRef Name="Buyer_Id" />
+    </Key>
+    <Property Name="Buyer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CNIC" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MilkBuyers" Relationship="Self.FK_MilkBuyer_Buyer" FromRole="Buyer" ToRole="MilkBuyer" />
+  </EntityType>
+  <EntityType Name="Calving">
+    <Key>
+      <PropertyRef Name="Calving_Id" />
+    </Key>
+    <Property Name="Calving_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Animal_Id" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="Int32" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_Calving_Animal" FromRole="Calving" ToRole="Animal" />
+  </EntityType>
+  <EntityType Name="DryPeriod">
+    <Key>
+      <PropertyRef Name="Dry_Id" />
+    </Key>
+    <Property Name="Dry_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Animal_Id" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_DryPeriod_Animal" FromRole="DryPeriod" ToRole="Animal" />
+  </EntityType>
+  <EntityType Name="Expense_Type">
+    <Key>
+      <PropertyRef Name="Type_Id" />
+    </Key>
+    <Property Name="Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Expenses" Relationship="Self.FK_Expenses_Expense_Type" FromRole="Expense_Type" ToRole="Expenses" />
+  </EntityType>
+  <EntityType Name="Expens">
+    <Key>
+      <PropertyRef Name="Exp_Id" />
+    </Key>
+    <Property Name="Exp_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type_Id" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Narration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Expense_Type" Relationship="Self.FK_Expenses_Expense_Type" FromRole="Expenses" ToRole="Expense_Type" />
+  </EntityType>
+  <EntityType Name="FeedConsumption">
+    <Key>
+      <PropertyRef Name="ConsumptionId" />
+    </Key>
+    <Property Name="ConsumptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Formula_Id" Type="Int32" Nullable="false" />
+    <Property Name="Animal_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Slot" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_FeedConsumption_Animal" FromRole="FeedConsumption" ToRole="Animal" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_FeedConsumption_AspNetUsers" FromRole="FeedConsumption" ToRole="AspNetUsers" />
+    <NavigationProperty Name="FeedFormula" Relationship="Self.FK_FeedConsumption_FeedFormula" FromRole="FeedConsumption" ToRole="FeedFormula" />
+  </EntityType>
+  <EntityType Name="FeedFormula">
+    <Key>
+      <PropertyRef Name="Formula_Id" />
+    </Key>
+    <Property Name="Formula_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormulaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FeedConsumptions" Relationship="Self.FK_FeedConsumption_FeedFormula" FromRole="FeedFormula" ToRole="FeedConsumption" />
+    <NavigationProperty Name="FeedPreparings" Relationship="Self.FK_FeedPreparing_FeedFormula" FromRole="FeedFormula" ToRole="FeedPreparing" />
+  </EntityType>
+  <EntityType Name="FeedPreparing">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Formula_Id" Type="Int32" Nullable="false" />
+    <Property Name="StockItem_Id" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="Int32" />
+    <NavigationProperty Name="FeedFormula" Relationship="Self.FK_FeedPreparing_FeedFormula" FromRole="FeedPreparing" ToRole="FeedFormula" />
+    <NavigationProperty Name="StockItem" Relationship="Self.FK_FeedPreparing_StockItem" FromRole="FeedPreparing" ToRole="StockItem" />
+  </EntityType>
+  <EntityType Name="Medication">
+    <Key>
+      <PropertyRef Name="Medication_Id" />
+    </Key>
+    <Property Name="Medication_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StockItem_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Animal_Id" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Method" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Time" Type="Time" Precision="7" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_Medication_Animal" FromRole="Medication" ToRole="Animal" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Medication_AspNetUsers" FromRole="Medication" ToRole="AspNetUsers" />
+    <NavigationProperty Name="StockItem" Relationship="Self.FK_Medication_StockItem" FromRole="Medication" ToRole="StockItem" />
+  </EntityType>
+  <EntityType Name="MilkBuyer">
+    <Key>
+      <PropertyRef Name="MilkBuyer_Id" />
+    </Key>
+    <Property Name="MilkBuyer_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Buyer_Id" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Precision="3" />
+    <Property Name="Quantity" Type="Double" />
+    <Property Name="Rate" Type="Int32" />
+    <NavigationProperty Name="Buyer" Relationship="Self.FK_MilkBuyer_Buyer" FromRole="MilkBuyer" ToRole="Buyer" />
+  </EntityType>
+  <EntityType Name="Milking">
+    <Key>
+      <PropertyRef Name="Milking_Id" />
+    </Key>
+    <Property Name="Milking_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Animal_Id" Type="Int32" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Amount_Ltr" Type="Double" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Slot" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Animal" Relationship="Self.FK_Milking_Animal" FromRole="Milking" ToRole="Animal" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Milking_User" FromRole="Milking" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="StockAdd">
+    <Key>
+      <PropertyRef Name="StockAdd_Id" />
+    </Key>
+    <Property Name="StockAdd_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StockItem_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TotalBags_Packs" Type="Int32" />
+    <Property Name="BagSize_PackSize" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Expiry" Type="DateTime" Precision="0" />
+    <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rate" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_StockAdd_AspNetUsers" FromRole="StockAdd" ToRole="AspNetUsers" />
+    <NavigationProperty Name="StockItem" Relationship="Self.FK_StockAdd_StockItem" FromRole="StockAdd" ToRole="StockItem" />
+  </EntityType>
+  <EntityType Name="StockItem">
+    <Key>
+      <PropertyRef Name="StockItem_Id" />
+    </Key>
+    <Property Name="StockItem_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StockType_Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FeedPreparings" Relationship="Self.FK_FeedPreparing_StockItem" FromRole="StockItem" ToRole="FeedPreparing" />
+    <NavigationProperty Name="Medications" Relationship="Self.FK_Medication_StockItem" FromRole="StockItem" ToRole="Medication" />
+    <NavigationProperty Name="StockAdds" Relationship="Self.FK_StockAdd_StockItem" FromRole="StockItem" ToRole="StockAdd" />
+    <NavigationProperty Name="StockType" Relationship="Self.FK_StockItem_StockType" FromRole="StockItem" ToRole="StockType" />
+  </EntityType>
+  <EntityType Name="StockRemaining">
+    <Key>
+      <PropertyRef Name="StockRemaining_Id" />
+    </Key>
+    <Property Name="StockRemaining_Id" Type="Int32" Nullable="false" />
+    <Property Name="StockItem_Id" Type="Int32" Nullable="false" />
+    <Property Name="Quantity_In" Type="Int32" />
+    <Property Name="Quantity_Out" Type="Int32" />
+    <Property Name="Remaining" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StockType">
+    <Key>
+      <PropertyRef Name="StockType_Id" />
+    </Key>
+    <Property Name="StockType_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="StockItems" Relationship="Self.FK_StockItem_StockType" FromRole="StockType" ToRole="StockItem" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Abortion_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+    <End Role="Abortion" Type="Self.Abortion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="Abortion">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Abortion_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Abortion" Type="Self.Abortion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Abortion">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Animal_AnimalBreed">
+    <End Role="AnimalBreed" Type="Self.AnimalBreed" Multiplicity="1" />
+    <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnimalBreed">
+        <PropertyRef Name="Breed_Id" />
+      </Principal>
+      <Dependent Role="Animal">
+        <PropertyRef Name="Breed_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AnimalSale_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="AnimalSale" Type="Self.AnimalSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="AnimalSale">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Breeding_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+    <End Role="Breeding" Type="Self.Breeding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="Breeding">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Breeding_Animal1">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+    <End Role="Breeding" Type="Self.Breeding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="Breeding">
+        <PropertyRef Name="Animal_Id_M" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Calving_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="Calving" Type="Self.Calving" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="Calving">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DryPeriod_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="DryPeriod" Type="Self.DryPeriod" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="DryPeriod">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedConsumption_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="FeedConsumption" Type="Self.FeedConsumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="FeedConsumption">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medication_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+    <End Role="Medication" Type="Self.Medication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="Medication">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Milking_Animal">
+    <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+    <End Role="Milking" Type="Self.Milking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Animal">
+        <PropertyRef Name="Animal_Id" />
+      </Principal>
+      <Dependent Role="Milking">
+        <PropertyRef Name="Animal_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserInfo_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="AspNetUserInfo" Type="Self.AspNetUserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserInfo">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Breeding_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Breeding" Type="Self.Breeding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Breeding">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedConsumption_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="FeedConsumption" Type="Self.FeedConsumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FeedConsumption">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medication_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Medication" Type="Self.Medication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Medication">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Milking_User">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Milking" Type="Self.Milking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Milking">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockAdd_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="StockAdd" Type="Self.StockAdd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockAdd">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MilkBuyer_Buyer">
+    <End Role="Buyer" Type="Self.Buyer" Multiplicity="1" />
+    <End Role="MilkBuyer" Type="Self.MilkBuyer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buyer">
+        <PropertyRef Name="Buyer_Id" />
+      </Principal>
+      <Dependent Role="MilkBuyer">
+        <PropertyRef Name="Buyer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expenses_Expense_Type">
+    <End Role="Expense_Type" Type="Self.Expense_Type" Multiplicity="0..1" />
+    <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expense_Type">
+        <PropertyRef Name="Type_Id" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedConsumption_FeedFormula">
+    <End Role="FeedFormula" Type="Self.FeedFormula" Multiplicity="1" />
+    <End Role="FeedConsumption" Type="Self.FeedConsumption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeedFormula">
+        <PropertyRef Name="Formula_Id" />
+      </Principal>
+      <Dependent Role="FeedConsumption">
+        <PropertyRef Name="Formula_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedPreparing_FeedFormula">
+    <End Role="FeedFormula" Type="Self.FeedFormula" Multiplicity="1" />
+    <End Role="FeedPreparing" Type="Self.FeedPreparing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FeedFormula">
+        <PropertyRef Name="Formula_Id" />
+      </Principal>
+      <Dependent Role="FeedPreparing">
+        <PropertyRef Name="Formula_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FeedPreparing_StockItem">
+    <End Role="StockItem" Type="Self.StockItem" Multiplicity="1" />
+    <End Role="FeedPreparing" Type="Self.FeedPreparing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockItem">
+        <PropertyRef Name="StockItem_Id" />
+      </Principal>
+      <Dependent Role="FeedPreparing">
+        <PropertyRef Name="StockItem_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medication_StockItem">
+    <End Role="StockItem" Type="Self.StockItem" Multiplicity="1" />
+    <End Role="Medication" Type="Self.Medication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockItem">
+        <PropertyRef Name="StockItem_Id" />
+      </Principal>
+      <Dependent Role="Medication">
+        <PropertyRef Name="StockItem_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockAdd_StockItem">
+    <End Role="StockItem" Type="Self.StockItem" Multiplicity="1" />
+    <End Role="StockAdd" Type="Self.StockAdd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockItem">
+        <PropertyRef Name="StockItem_Id" />
+      </Principal>
+      <Dependent Role="StockAdd">
+        <PropertyRef Name="StockItem_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockItem_StockType">
+    <End Role="StockType" Type="Self.StockType" Multiplicity="1" />
+    <End Role="StockItem" Type="Self.StockItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StockType">
+        <PropertyRef Name="StockType_Id" />
+      </Principal>
+      <Dependent Role="StockItem">
+        <PropertyRef Name="StockType_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Abortions" EntityType="Self.Abortion" />
+    <EntitySet Name="Animals" EntityType="Self.Animal" />
+    <EntitySet Name="AnimalBreeds" EntityType="Self.AnimalBreed" />
+    <EntitySet Name="AnimalSales" EntityType="Self.AnimalSale" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserInfoes" EntityType="Self.AspNetUserInfo" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="Breedings" EntityType="Self.Breeding" />
+    <EntitySet Name="Buyers" EntityType="Self.Buyer" />
+    <EntitySet Name="Calvings" EntityType="Self.Calving" />
+    <EntitySet Name="DryPeriods" EntityType="Self.DryPeriod" />
+    <EntitySet Name="Expense_Type" EntityType="Self.Expense_Type" />
+    <EntitySet Name="Expenses" EntityType="Self.Expens" />
+    <EntitySet Name="FeedConsumptions" EntityType="Self.FeedConsumption" />
+    <EntitySet Name="FeedFormulas" EntityType="Self.FeedFormula" />
+    <EntitySet Name="FeedPreparings" EntityType="Self.FeedPreparing" />
+    <EntitySet Name="Medications" EntityType="Self.Medication" />
+    <EntitySet Name="MilkBuyers" EntityType="Self.MilkBuyer" />
+    <EntitySet Name="Milkings" EntityType="Self.Milking" />
+    <EntitySet Name="StockAdds" EntityType="Self.StockAdd" />
+    <EntitySet Name="StockItems" EntityType="Self.StockItem" />
+    <EntitySet Name="StockRemainings" EntityType="Self.StockRemaining" />
+    <EntitySet Name="StockTypes" EntityType="Self.StockType" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Abortion_Animal" Association="Self.FK_Abortion_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Abortion" EntitySet="Abortions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Abortion_AspNetUsers" Association="Self.FK_Abortion_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Abortion" EntitySet="Abortions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Animal_AnimalBreed" Association="Self.FK_Animal_AnimalBreed">
+      <End Role="AnimalBreed" EntitySet="AnimalBreeds" />
+      <End Role="Animal" EntitySet="Animals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AnimalSale_Animal" Association="Self.FK_AnimalSale_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="AnimalSale" EntitySet="AnimalSales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Breeding_Animal" Association="Self.FK_Breeding_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Breeding" EntitySet="Breedings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Breeding_Animal1" Association="Self.FK_Breeding_Animal1">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Breeding" EntitySet="Breedings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calving_Animal" Association="Self.FK_Calving_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Calving" EntitySet="Calvings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DryPeriod_Animal" Association="Self.FK_DryPeriod_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="DryPeriod" EntitySet="DryPeriods" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedConsumption_Animal" Association="Self.FK_FeedConsumption_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="FeedConsumption" EntitySet="FeedConsumptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medication_Animal" Association="Self.FK_Medication_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Medication" EntitySet="Medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Milking_Animal" Association="Self.FK_Milking_Animal">
+      <End Role="Animal" EntitySet="Animals" />
+      <End Role="Milking" EntitySet="Milkings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserInfo_AspNetUsers" Association="Self.FK_AspNetUserInfo_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserInfo" EntitySet="AspNetUserInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Breeding_AspNetUsers" Association="Self.FK_Breeding_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Breeding" EntitySet="Breedings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedConsumption_AspNetUsers" Association="Self.FK_FeedConsumption_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FeedConsumption" EntitySet="FeedConsumptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medication_AspNetUsers" Association="Self.FK_Medication_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Medication" EntitySet="Medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Milking_User" Association="Self.FK_Milking_User">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Milking" EntitySet="Milkings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockAdd_AspNetUsers" Association="Self.FK_StockAdd_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="StockAdd" EntitySet="StockAdds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MilkBuyer_Buyer" Association="Self.FK_MilkBuyer_Buyer">
+      <End Role="Buyer" EntitySet="Buyers" />
+      <End Role="MilkBuyer" EntitySet="MilkBuyers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expenses_Expense_Type" Association="Self.FK_Expenses_Expense_Type">
+      <End Role="Expense_Type" EntitySet="Expense_Type" />
+      <End Role="Expenses" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedConsumption_FeedFormula" Association="Self.FK_FeedConsumption_FeedFormula">
+      <End Role="FeedFormula" EntitySet="FeedFormulas" />
+      <End Role="FeedConsumption" EntitySet="FeedConsumptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedPreparing_FeedFormula" Association="Self.FK_FeedPreparing_FeedFormula">
+      <End Role="FeedFormula" EntitySet="FeedFormulas" />
+      <End Role="FeedPreparing" EntitySet="FeedPreparings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FeedPreparing_StockItem" Association="Self.FK_FeedPreparing_StockItem">
+      <End Role="StockItem" EntitySet="StockItems" />
+      <End Role="FeedPreparing" EntitySet="FeedPreparings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medication_StockItem" Association="Self.FK_Medication_StockItem">
+      <End Role="StockItem" EntitySet="StockItems" />
+      <End Role="Medication" EntitySet="Medications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockAdd_StockItem" Association="Self.FK_StockAdd_StockItem">
+      <End Role="StockItem" EntitySet="StockItems" />
+      <End Role="StockAdd" EntitySet="StockAdds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockItem_StockType" Association="Self.FK_StockItem_StockType">
+      <End Role="StockType" EntitySet="StockTypes" />
+      <End Role="StockItem" EntitySet="StockItems" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
